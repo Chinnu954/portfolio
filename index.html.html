@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anushka Nizamabad | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --nf-black: #000000;
+      --nf-dark: #141414;
+      --nf-red: #e50914;
+      --nf-red-hover: #f40612;
+      --nf-gray: #b3b3b3;
+      --nf-green: #46d369;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: var(--nf-black);
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      padding: 1rem 4vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0));
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+    }
+
+    .logo span {
+      color: var(--nf-red);
+    }
+
+    .nav-links a {
+      color: #e5e5e5;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 7rem 8vw 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-summary {
+      max-width: 550px;
+      color: var(--nf-gray);
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.6rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--nf-red);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--nf-red-hover);
+    }
+
+    .btn-secondary {
+      background: rgba(109, 109, 110, 0.6);
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(109, 109, 110, 0.9);
+    }
+
+    .hero-tagline {
+      color: var(--nf-green);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-poster {
+      justify-self: center;
+    }
+
+    .poster-card {
+      width: 100%;
+      max-width: 260px;
+      aspect-ratio: 2/3;
+      border-radius: 0.6rem;
+      background: linear-gradient(145deg, #222222 0%, #141414 40%, #000000 100%);
+      box-shadow: 0 0 25px rgba(0,0,0,0.8);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster-badge {
+      position: absolute;
+      top: 0.7rem;
+      left: 0.7rem;
+      background: var(--nf-red);
+      padding: 0.15rem 0.5rem;
+      font-size: 0.7rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .poster-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .poster-meta {
+      font-size: 0.8rem;
+      color: var(--nf-gray);
+    }
+
+    /* GENERIC SECTION */
+    .section {
+      padding: 1.5rem 8vw 0.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-subtext {
+      font-size: 0.85rem;
+      color: var(--nf-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ROW CARDS (Netflix rows) */
+    .row {
+      margin-bottom: 1.8rem;
+    }
+
+    .row-title {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .row-cards {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.6rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .row-cards::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .row-cards::-webkit-scrollbar-thumb {
+      background: #333333;
+    }
+
+    .card {
+      min-width: 250px;
+      max-width: 280px;
+      background: var(--nf-dark);
+      border-radius: 0.4rem;
+      padding: 0.9rem;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-text {
+      font-size: 0.8rem;
+      color: var(--nf-gray);
+    }
+
+    .card-meta {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--nf-green);
+    }
+
+    /* SKILLS CHIPS */
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: var(--nf-dark);
+      font-size: 0.8rem;
+    }
+
+    /* TWO COLUMN LISTS */
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 0.4rem;
+    }
+
+    .two-col ul {
+      list-style: disc;
+      margin-left: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--nf-gray);
+    }
+
+    /* CONTACT & FOOTER */
+    #contact a {
+      color: var(--nf-red);
+      text-decoration: none;
+    }
+
+    #contact a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      padding: 2rem 8vw;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--nf-gray);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 6rem;
+      }
+
+      .hero-poster {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="logo">ANUSHKA<span>FLEX</span></div>
+    <nav class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div>
+        <p class="hero-tagline">Now streaming: entry-level developer</p>
+        <h1 class="hero-title">Anushka Nizamabad </h1>
+        <h2 class="hero-subtitle">· MCA Graduate</h2>
+        <p class="hero-summary">
+          MCA postgraduate fresher with strong foundations in Java, SQL, database management
+          and basic web development, seeking an entry-level role in software development or
+          data engineering. Eager to apply problem-solving skills, regular DSA practice and
+          project experience to build reliable, real-world solutions in a collaborative team.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View My Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-poster">
+        <div class="poster-card">
+          <div class="poster-badge">Top Pick</div>
+          <div>
+            <p class="poster-title">Waffle Menu Landing Page</p>
+            <p class="poster-meta">
+              Built a static waffle-themed website using HTML and CSS 
+              to present multiple waffle options with clear, 
+              descriptive text and a menu-style layout.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section">
+      <h2 class="section-title">Tech Stack Spotlight</h2>
+      <p class="section-subtext">Languages, tools and concepts used across projects and learning.</p>
+      <div class="chips-row">
+        <span class="chip">Java</span>
+        <span class="chip">SQL</span>
+        <!-- <span class="chip">Python</span> -->
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">CRUD Operations</span>
+        <span class="chip">Database Management</span>
+        <!-- <span class="chip">Jupyter Notebook</span> -->
+        <span class="chip">VS Code</span>
+        <span class="chip">Data Structures & Algorithms</span>
+        <span class="chip">Problem Solving</span>
+        <span class="chip">AI Tools (ChatGPT, Gemini, Claude, Co‑Pilot, Perplexity, Cursor)</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Trending Now: Projects</h2>
+
+      <div class="row">
+        <h3 class="row-title">Frontend</h3>
+        <div class="row-cards">
+          <article class="card">
+            <h4 class="card-title">Waffle Menu Landing Page</h4>
+            <p class="card-text">
+              Built a static waffle-themed website using HTML and CSS to present multiple waffle options with clear, descriptive text and a menu-style layout.
+​              Organized content into sections highlighting toppings like chocolate, berries, Nutella, caramel and more to make choices easy for users.
+​                Focused on clean typography and structure to improve readability and make the page suitable as a simple marketing or restaurant menu site
+            </p>
+            <p class="card-meta">
+              Highlight:Designed focused product descriptions for different waffle variants
+               (chocolate, berries, Nutella, caramel, etc.) to simulate an actual café landing page.
+
+          </article>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-title">Web & Database</h3>
+        <div class="row-cards">
+          <article class="card">
+            <h4 class="card-title">Real-Time Website Contribution</h4>
+            <p class="card-text">
+              Assisted in maintaining and updating a family-built website to improve user
+              experience and information accuracy. Worked on data retrieval and webpage
+              updates using HTML, CSS and SQL, retrieving, inserting and updating data from
+              the backend database.
+            </p>
+            <p class="card-meta">
+              Focus: Reliable data display and smoother content updates.
+            </p>
+          </article>
+
+          <article class="card">
+            <h4 class="card-title">Database Management System (Learning Project)</h4>
+            <p class="card-text">
+              Gained practical experience performing CRUD operations including create, read,
+              update and delete on relational data. Practised writing SELECT queries with
+              filters, sorting and simple joins to improve retrieval clarity and performance,
+              while strengthening understanding of primary keys, foreign keys and basic
+              normalization concepts.
+            </p>
+            <p class="card-meta">
+              Focus: Solid relational database fundamentals and query writing.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="section">
+      <h2 class="section-title">Education Playlist</h2>
+      <div class="row-cards">
+        <article class="card">
+          <h4 class="card-title">MCA · University PG College (OU)</h4>
+          <p class="card-text">
+            2023 – 2025 · Secured 90%. Built strong foundations in software development,
+            algorithms and database management with hands-on academic projects.
+          </p>
+        </article>
+
+        <article class="card">
+          <h4 class="card-title">Bsc(computer science) · Sindhu Degree College</h4>
+          <p class="card-text">
+            2020 – 2023 · Scored 90%. Strengthened core computer science concepts and
+            programming fundamentals, preparing for postgraduate studies.
+          </p>
+        </article>
+
+        <article class="card">
+          <h4 class="card-title">Intermediate (MPC) · Sindhu Junior College</h4>
+          <p class="card-text">
+            2018 – 2020 · Achieved 92%. Focus on mathematics, physics and chemistry,
+            building analytical thinking skills.
+          </p>
+        </article>
+
+        <article class="card">
+          <h4 class="card-title">SSC · Krishnaveni Concept School</h4>
+          <p class="card-text">
+            2017 – 2018 · GPA 9.7. Consistent academic performance and early interest in
+            technology.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & STRENGTHS -->
+    <section id="achievements" class="section">
+      <h2 class="section-title">Featured Highlights</h2>
+      <div class="two-col">
+        <div>
+          <h3 class="row-title">Achievements & Activities</h3>
+          <ul>
+            <li>Team Leader in NSS, organizing activities and coordinating volunteers.</li>
+            <li>Secured District 1st in NSS Elocution Competition, demonstrating strong communication skills.</li>
+            <li>Achieved ICET Rank 800, reflecting strong academic and competitive performance.</li>
+            <li>Regular DSA practice with peers, solving array, string and recursion problems.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="row-title">Strengths</h3>
+          <ul>
+            <li>Quick learner, adaptive to new technologies and frameworks.</li>
+            <li>Detail-oriented and consistent in coding, debugging and documentation.</li>
+            <li>Good team player with clear communication and presentation skills.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact & Availability</h2>
+      <p class="section-subtext">Available for full-time entry-level roles and internships in software or data engineering.</p>
+      <p>Email:
+        <a href="mailto:anushkanizamabad2005@gmail.com">
+          anushkanizamabad2005@gmail.com
+        </a>
+      </p>
+      <p>Phone:
+        <a href="tel:+919063451062">
+          +91 90634 51062
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2025 Anushka Nizamabad · Netflix-inspired developer portfolio
+  </footer>
+</body>
+</html>
